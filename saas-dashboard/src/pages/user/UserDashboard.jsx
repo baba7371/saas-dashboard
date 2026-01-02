@@ -39,34 +39,12 @@ const UserDashboard = () => {
       </div>
 
       {/* KPI Stats Grid */}
+       {/* inside your grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatsCard 
-          title="Total Requests" 
-          value="128,430" 
-          trend="up" 
-          trendValue="12%" 
-          icon={Zap} 
-        />
-        <StatsCard 
-          title="Avg. Latency" 
-          value="45ms" 
-          trend="down" 
-          trendValue="3ms" 
-          icon={Activity} 
-        />
-        <StatsCard 
-          title="Current Plan" 
-          value="Pro" 
-          trend="neutral" 
-          icon={CreditCard} 
-        />
-        <StatsCard 
-          title="Active Users" 
-          value="1,234" 
-          trend="up" 
-          trendValue="4%" 
-          icon={Users} 
-        />
+        <StatsCard title="Total Requests" value="128,430" trend="up" trendValue="12%" icon={Zap} delay={0} />
+        <StatsCard title="Avg. Latency" value="45ms" trend="down" trendValue="3ms" icon={Activity} delay={1} />
+        <StatsCard title="Current Plan" value="Pro" trend="neutral" icon={CreditCard} delay={2} />
+        <StatsCard title="Active Users" value="1,234" trend="up" trendValue="4%" icon={Users} delay={3} />
       </div>
 
       {/* Main Chart Section */}
