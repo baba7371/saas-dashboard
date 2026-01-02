@@ -2,8 +2,7 @@
 
 A production-ready SaaS dashboard built with the **MERN Stack** (MongoDB, Express, React, Node.js). This project features a dual-role architecture (Admin & User), secure authentication, dynamic profile management, and interactive analytics.
 
-![Dashboard Preview](https://github.com/baba7371/saas-dashboard/blob/main/public/preview.png?raw=true)
-
+## Images of working Web is available in Preview Folder.....
 ## 🚀 Features
 
 ### Core Architecture
