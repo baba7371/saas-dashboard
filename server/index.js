@@ -11,7 +11,7 @@ app.use(cors()); // Allows frontend (port 5173) to talk to backend (port 5000)
 
 // --- 1. CONNECT TO LOCAL MONGODB ---
 // 'saas-dashboard' is the name of the database. MongoDB creates it automatically if it doesn't exist.
-const MONGO_URI = 'mongodb://127.0.0.1:27017/saas-dashboard';
+const MONGO_URI = 'mongodb+srv://tiwaribaba845438_db_user:43DOmWwRwhzXVZ76@cluster0.dvxfriv.mongodb.net/?appName=Cluster0';
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ MongoDB Connected Successfully'))
