@@ -38,7 +38,7 @@ const Settings = () => {
   const handleSave = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/update-profile', {
+      const res = await fetch('https://saas-dashboard-z4sg.onrender.com/api/update-profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
