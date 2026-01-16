@@ -12,7 +12,7 @@ const Settings = () => {
     firstName: localStorage.getItem('userName') || '',
     email: localStorage.getItem('userEmail') || '',
     bio: 'Frontend Developer building cool dashboards.',
-    avatar: localStorage.getItem('userAvatar') || '' // 👈 Load existing avatar
+    avatar: localStorage.getItem('userAvatar') || '' 
   });
 
   const [notifications, setNotifications] = useState({
@@ -25,6 +25,12 @@ const Settings = () => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Optional: Check file size (limit to 2MB to prevent payload errors)
+      if (file.size > 2 * 1024 * 1024) {
+        alert("File size too large! Please upload an image under 2MB.");
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         // Convert to Base64 and update state
@@ -36,9 +42,18 @@ const Settings = () => {
 
   // --- 2. SAVE CHANGES TO BACKEND ---
   const handleSave = async () => {
+    if (!formData.email) {
+      alert("Error: No email found. Please log in again.");
+      return;
+    }
+
     setLoading(true);
+    // 👇 Updated Base URL Logic
+    // In production, this points to your Render backend.
+    const API_BASE_URL = 'https://saas-dashboard-z4sg.onrender.com'; 
+
     try {
-      const res = await fetch('https://saas-dashboard-z4sg.onrender.com/api/update-profile', {
+      const res = await fetch(`${API_BASE_URL}/api/update-profile`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -49,21 +64,22 @@ const Settings = () => {
       });
 
       const data = await res.json();
+      
       if(res.ok) {
         // Update LocalStorage instantly
         localStorage.setItem('userName', data.user.name);
         localStorage.setItem('userAvatar', data.user.avatar);
         
-        // Force a page reload or event dispatch to update Sidebar instantly
+        // Force a page reload to update Sidebar instantly
         window.dispatchEvent(new Event("storage"));
         alert("Profile Updated Successfully!");
-        window.location.reload(); // Simple way to refresh sidebar
+        window.location.reload(); 
       } else {
-        alert("Failed to update.");
+        alert(data.message || "Failed to update profile.");
       }
     } catch (error) {
-      console.error(error);
-      alert("Server Error");
+      console.error("Update failed:", error);
+      alert("Server Error: Could not connect to backend.");
     } finally {
       setLoading(false);
     }
@@ -94,7 +110,7 @@ const Settings = () => {
               />
             ) : (
               <div className="w-20 h-20 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xl font-bold text-slate-600 dark:text-slate-300 border-4 border-white dark:border-slate-800 shadow-sm">
-                {formData.firstName.charAt(0)}
+                {formData.firstName ? formData.firstName.charAt(0) : 'U'}
               </div>
             )}
 
@@ -107,7 +123,7 @@ const Settings = () => {
           
           <div>
             <h4 className="font-medium text-slate-900 dark:text-white">Profile Photo</h4>
-            <p className="text-sm text-slate-500 mb-2">Recommended 400x400px.</p>
+            <p className="text-sm text-slate-500 mb-2">Recommended 400x400px (Max 2MB).</p>
             <div className="flex gap-3">
               <label className="cursor-pointer px-3 py-1.5 bg-white border border-slate-200 rounded text-xs font-medium hover:bg-slate-50 text-slate-900 transition-colors">
                 Change
@@ -143,7 +159,7 @@ const Settings = () => {
         </div>
       </Card>
 
-      {/* Notifications (Existing Code...) */}
+      {/* Notifications */}
       <Card className="p-6">
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Notifications</h3>
         <div className="divide-y divide-slate-100 dark:divide-slate-700/50">
