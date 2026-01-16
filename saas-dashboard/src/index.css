@@ -1,2 +1,88 @@
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
+
+@import "tailwindcss";
+
+@theme {
+  /* --- 1. DEFINE YOUR CUSTOM COLORS --- */
+  
+  /* Alabaster Grey */
+  --color-alabaster-50: #f0f4f5;
+  --color-alabaster-100: #e1eaea;
+  --color-alabaster-200: #c2d4d6;
+  --color-alabaster-300: #a4bfc1;
+  --color-alabaster-400: #86aaac;
+  --color-alabaster-500: #679498;
+  --color-alabaster-600: #537779;
+  --color-alabaster-700: #3e595b;
+  --color-alabaster-800: #293b3d;
+  --color-alabaster-900: #151e1e;
+  --color-alabaster-950: #0e1515;
+
+  /* Frosted Blue */
+  --color-frosted-50: #ecf8f9;
+  --color-frosted-100: #d8f0f3;
+  --color-frosted-200: #b1e1e7;
+  --color-frosted-300: #8bd2da;
+  --color-frosted-400: #64c3ce;
+  --color-frosted-500: #3db5c2;
+  --color-frosted-600: #31909b;
+  --color-frosted-700: #256c74;
+  --color-frosted-800: #18484e;
+  --color-frosted-900: #0c2427;
+  --color-frosted-950: #09191b;
+
+  /* Cerulean */
+  --color-cerulean-50: #e5f9ff;
+  --color-cerulean-100: #ccf2ff;
+  --color-cerulean-200: #99e6ff;
+  --color-cerulean-300: #66d9ff;
+  --color-cerulean-400: #33ccff;
+  --color-cerulean-500: #00bfff;
+  --color-cerulean-600: #0099cc;
+  --color-cerulean-700: #007399;
+  --color-cerulean-800: #004d66;
+  --color-cerulean-900: #002633;
+  --color-cerulean-950: #001b24;
+
+  /* Deep Space Blue */
+  --color-deep-space-50: #e5f7ff;
+  --color-deep-space-100: #ccefff;
+  --color-deep-space-200: #99dfff;
+  --color-deep-space-300: #66cfff;
+  --color-deep-space-400: #33beff;
+  --color-deep-space-500: #00aeff;
+  --color-deep-space-600: #008bcc;
+  --color-deep-space-700: #006999;
+  --color-deep-space-800: #004666;
+  --color-deep-space-900: #002333;
+  --color-deep-space-950: #001824;
+
+  /* --- 2. OVERRIDE DEFAULTS (THE "SMART MAPPING") --- */
+  
+  /* Make 'bg-indigo-600' look like Deep Space Blue */
+  --color-indigo-50: var(--color-deep-space-50);
+  --color-indigo-100: var(--color-deep-space-100);
+  --color-indigo-200: var(--color-deep-space-200);
+  --color-indigo-300: var(--color-deep-space-300);
+  --color-indigo-400: var(--color-deep-space-400);
+  --color-indigo-500: var(--color-deep-space-500);
+  --color-indigo-600: var(--color-deep-space-600);
+  --color-indigo-700: var(--color-deep-space-700);
+  --color-indigo-800: var(--color-deep-space-800);
+  --color-indigo-900: var(--color-deep-space-900);
+  --color-indigo-950: var(--color-deep-space-950);
+
+  /* Make 'text-slate-500' look like Alabaster Grey */
+  --color-slate-50: var(--color-alabaster-50);
+  --color-slate-100: var(--color-alabaster-100);
+  --color-slate-200: var(--color-alabaster-200);
+  --color-slate-300: var(--color-alabaster-300);
+  --color-slate-400: var(--color-alabaster-400);
+  --color-slate-500: var(--color-alabaster-500);
+  --color-slate-600: var(--color-alabaster-600);
+  --color-slate-700: var(--color-alabaster-700);
+  --color-slate-800: var(--color-alabaster-800);
+  --color-slate-900: var(--color-alabaster-900);
+  --color-slate-950: var(--color-alabaster-950);
+}
