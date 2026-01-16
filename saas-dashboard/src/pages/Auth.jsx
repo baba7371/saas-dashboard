@@ -38,7 +38,7 @@ const AuthPage = () => {
     // --- 2. EXISTING LOGIN/REGISTER LOGIC ---
     setIsLoading(true);
     const endpoint = view === 'login' ? '/api/login' : '/api/register';
-    const url = `https://saas-dashboard-z4sg.onrender.com${endpoint}`;
+    const url = `http://localhost:5000${endpoint}`;
 
     try {
       const res = await fetch(url, {

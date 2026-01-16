@@ -1,3 +1,5 @@
+require('dotenv').config(); // 👈 Loads the .env file
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -7,14 +9,11 @@ const User = require('./models/User');
 
 const app = express();
 app.use(express.json({ limit: '50mb' })); // Allows parsing JSON from frontend
-app.use(cors()); // Allows frontend (port 5173) to talk to backend (port 5000)
+app.use(cors()); // Allows frontend to talk to backend
 
-// --- 1. CONNECT TO LOCAL MONGODB ---
-// 'saas-dashboard' is the name of the database. MongoDB creates it automatically if it doesn't exist.
-const MONGO_URI = 'mongodb+srv://tiwaribaba845438_db_user:43DOmWwRwhzXVZ76@cluster0.dvxfriv.mongodb.net/?appName=Cluster0';
-
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('✅ MongoDB Connected Successfully'))
+// --- 1. CONNECT TO MONGODB (ATLAS CLOUD) ---
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB Atlas Connected Successfully'))
   .catch(err => console.error('❌ MongoDB Connection Error:', err));
 
 
@@ -63,14 +62,17 @@ app.post('/api/login', async (req, res) => {
       user: { 
         name: user.name, 
         role: user.role,
-        email: user.email 
+        email: user.email,
+        avatar: user.avatar // Send avatar on login too
       } 
     });
   } catch (error) {
+    console.error("❌ LOGIN ERROR:", error); // 👈 ADD THIS LINE
     res.status(500).json({ message: 'Server error' });
   }
 });
 
+// UPDATE PROFILE API
 app.put('/api/update-profile', async (req, res) => {
   try {
     const { email, avatar, name } = req.body;
@@ -91,7 +93,7 @@ app.put('/api/update-profile', async (req, res) => {
         name: updatedUser.name, 
         email: updatedUser.email, 
         role: updatedUser.role,
-        avatar: updatedUser.avatar // Send back the new avatar
+        avatar: updatedUser.avatar 
       } 
     });
   } catch (error) {
@@ -100,5 +102,6 @@ app.put('/api/update-profile', async (req, res) => {
 });
 
 // --- 3. START SERVER ---
-const PORT = 5000;
+// ⚠️ Updated to use process.env.PORT for Render deployment
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
